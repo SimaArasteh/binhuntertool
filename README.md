@@ -8,7 +8,7 @@ As mentioned in our paper, we performed all experiments on a Linux server with 2
 
 # Installation
 
-To install all dependencies, first download the Dockerfile from .
+To install all dependencies, first download the Dockerfile from https://drive.google.com/file/d/1NM3f8HvLPMlps4ZDyBqdQEug03Xubae9/view?usp=drive_link.
 
 Then create a directory called bindocker and put the dockerfile inside this directory. 
 
