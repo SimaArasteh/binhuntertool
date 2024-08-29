@@ -8,7 +8,7 @@ As mentioned in our paper, we performed all experiments on a Linux server with 2
 
 # Installation
 
-To install all dependencies, first download the Dockerfile from https://drive.google.com/file/d/1NM3f8HvLPMlps4ZDyBqdQEug03Xubae9/view?usp=drive_link.
+To install all dependencies, first download the Dockerfile from https://drive.google.com/drive/folders/1MrdlnvWPjTscoEviZRabamV8UVUmuTUp?usp=sharing.
 
 Then create a directory called bindocker and put the dockerfile inside this directory. 
 
@@ -57,7 +57,7 @@ Now install all dependencies and requirements using following command.
 pip3 install -r requirements.txt
 
 ```
-When all dependencies installed successfully, download the data from https://drive.google.com/file/d/1NM3f8HvLPMlps4ZDyBqdQEug03Xubae9/view?usp=drive_link. Then copy the data.zip inside the docker. In your local machine find the container id of binhunter. 
+When all dependencies installed successfully, download the data from https://drive.google.com/drive/folders/1MrdlnvWPjTscoEviZRabamV8UVUmuTUp?usp=sharing. Then copy the data.zip inside the docker. In your local machine find the container id of binhunter. 
 
 ```
 docker ps
