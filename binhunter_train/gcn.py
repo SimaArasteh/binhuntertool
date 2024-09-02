@@ -23,6 +23,7 @@ import tensorflow.compat.v1 as tf
 from tqdm import tqdm
 from collections import Counter
 import joblib
+import angr
 import logging
 from sklearn.metrics import precision_score
 
@@ -139,7 +140,7 @@ class GCN():
         self.word_dictionary = None
         self.average_bb_number = None
         self.params = params
-        #self.function_names = function_names
+        
         self.allowed_edges = allowed_edges
         self.nb_classes = nb_classes 
         self.random_seed = random_seed
@@ -778,7 +779,8 @@ class GCN():
             
 
             adj_testing, features_testing, one_hot_targets_testing ,s_sizesss, real_adresses, slice_adress, test_bin_pathes= data
-
+            memory_check = ['CWE416', 'CWE590']
+            
             adj_testing_new = []
             features_testing_new = []
             one_hot_targets_testing_new = []
@@ -882,20 +884,27 @@ class GCN():
 
                         acc_for_all_testing.append(1)
                     else:
-
-                        number_false_negatives+=1
-                        predicted_labels.append(0)
-                        acc_for_all_testing.append(0)
-                        t_labels.append(1)
+                        
+                        if self.cwe_type in ['CWE416', 'CWE590']:
+                            if self.check_for_mem_exception(accuracies):
+                                number_false_negatives+=1
+                                predicted_labels.append(0)
+                                acc_for_all_testing.append(0)
+                                t_labels.append(1)
+                        else:
+                            number_false_negatives+=1
+                            predicted_labels.append(0)
+                            acc_for_all_testing.append(0)
+                            t_labels.append(1)
 
 
                     
-
+                
                 if labels_index_zero : 
 
                     c = Counter(accuracies)
                     value, count = c.most_common()[0]
-
+                    
                     if any(accuracies) and self.check_over(overs):
                         
                         number_true_negatives+=1
@@ -922,10 +931,23 @@ class GCN():
             return losses, acc_for_all_testing, idx, 1, TPR, FPR
 
 
+    def check_for_mem_exception(self, succ):
+        if len(succ) > 3:
+            return True
+        else:
+            return False
     def check_over(self, ls_overs):
+        
+        memory_corruption = ['CWE401', 'CWE416']
         for element in ls_overs:
-            if element < self.params['over_rate']:
-                return False
+            if element < self.params['over_rate'] :
+                
+                if self.cwe_type in  memory_corruption :
+                    if element != 0:
+                        return False
+                else:
+                    return False
+        
         return True
     def check_in_size(self, list_sizes):
         for item in list_sizes:
