@@ -885,7 +885,7 @@ class GCN():
                         acc_for_all_testing.append(1)
                     else:
                         
-                        if self.cwe_type in ['CWE416', 'CWE590']:
+                        if self.cwe_type in memory_check:
                             if self.check_for_mem_exception(accuracies):
                                 number_false_negatives+=1
                                 predicted_labels.append(0)
