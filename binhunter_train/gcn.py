@@ -23,7 +23,6 @@ import tensorflow.compat.v1 as tf
 from tqdm import tqdm
 from collections import Counter
 import joblib
-import angr
 import logging
 from sklearn.metrics import precision_score
 
