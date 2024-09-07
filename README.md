@@ -1,6 +1,27 @@
 # binhuntertool
 
 This is an implementation of the paper *BinHunter: A Fine-Grained Graph Representation for Localizing Vulnerabilities in Binary Executables*. BinHunter is a tool designed to find and localize various types of vulnerabilities within binary programs. It leverages a Graph Convolutional Neural Network (GCN) to train on vulnerabilities. For each type of vulnerability, we train a separate binary classifier. During the training phase, BinHunter trains on a subgraph of the Program Dependence Graph (PDG) of a function that locates vulnerability and patch patterns extracted using debug symbols (DWARF) in the binary. In the testing phase, however, it utilizes calls to external functions to slice the PDG.
+# Code Structure
+```bash
+BinHunter/
+|
+├── run_binhunter.py            # a module to run binhunter
+├── binhunter_graph/            
+│   ├── graphs/                 # This directory contains everything related to graph creation 
+│   │   ├── cdg.py              # Control dependence Graph creation
+│   │   ├── pdg.py              # Program Dependency Graph creation
+│   │   └── ddg.py              # Data Dependency Graph creation
+│   └── slicing/                
+│       └── debug.py            # Provide all functions to extract dwarf information
+│
+└── binhunter_train/            # Training modules
+    └── gcn.py                  # Graph Convolutional Network implementation
+
+```
+
+binhunter_graph directory contains all modules to create program dependence graph and graph representation and slicing the PDG. 
+binhunter_train directory contains all modules to train and test using GCN.
+Note that the neural_models directory is related to kipf model.  
 # requirements
 
 As mentioned in our paper, we performed all experiments on a Linux server with 256 GB RAM and an Intel XeonE5-1650 CPU with 12 cores. 
