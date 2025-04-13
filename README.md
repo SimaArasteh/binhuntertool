@@ -28,7 +28,7 @@ As mentioned in our paper, we performed all experiments on a Linux server with 2
 
 # Publications
 
-In case you use **binhuntertool** in your work, please consider citing our papers.
+In case you use **binhuntertool** in your work, please consider citing our paper.
 
 **[BinHunter: A Fine-Grained Graph Representation for Localizing Vulnerabilities in Binary Executables (ACSAC'24)](https://ieeexplore.ieee.org/abstract/document/10917813)**
 
